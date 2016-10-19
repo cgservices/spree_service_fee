@@ -1,0 +1,12 @@
+$('#rules').append('<%= escape_javascript( render(partial: 'spree/admin/service_fees/service_fee_rule', object: @service_fee_rule) ) %>');
+$('#rules .no-objects-found').hide();
+
+$('.product_picker').productAutocomplete();
+$('.user_picker').userAutocomplete();
+
+$('#service_fee_rule_type').html('<%= escape_javascript availible_service_fee_rules(@service_fee) %>');
+$('#service_fee_rule_type').select2();
+
+$('#rules .select2').select2();
+
+set_taxon_select('#product_taxon_ids')

@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+    <%= link_to plural_resource_name(Spree::ServiceFee), admin_service_fees_url %> /
+    <%= Spree.t(:new_service_fee) %>
+<% end %>
+
+<%= form_for :service_fee, :url => collection_url do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <div class="text-center">
+      <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+    </div>
+<% end %>

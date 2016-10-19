@@ -1,0 +1,29 @@
+<div class="panel-heading">
+  <h1 class="panel-title">
+    <%= Spree.t(:adjustments) %>
+  </h1>
+</div>
+<div id="adjustment_fields" class="panel-body">
+  <%= form_tag spree.admin_service_fee_service_fee_adjustments_path(@service_fee), :remote => true, :id => 'new_service_fee_adjustment_form' do %>
+      <div class="form-actions">
+        <%= button Spree.t(:add), 'plus', 'submit', class: "btn-success" %>
+        <br/>
+        <br/>
+      </div>
+  <% end %>
+
+  <%= form_for @service_fee, :url => object_url, :method => :put do |f| %>
+      <div class="actions">
+        <div id="adjustments" class="filter_list margint">
+          <% if @service_fee.rules.any? %>
+              <%= render :partial => 'service_fee_adjustment', :collection => @service_fee.adjustment_amounts, :locals => {} %>
+          <% else %>
+              <div class="alert alert-warning no-objects-found">
+                <%= Spree.t(:no_rules_added) %>
+              </div>
+          <% end %>
+        </div>
+        <%= button Spree.t('actions.update'), 'ok' %>
+      </div>
+  <% end%>
+</div>

@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+    <%= plural_resource_name(Spree::ServiceFee) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:new_service_fee), new_object_url, :class => "btn-success", :icon => 'add' %>
+<% end %>
+
+<% if @service_fees.any? %>
+    <table class="table sortable" id='listing_service_fees' data-hook data-sortable-link="<%= update_positions_admin_service_fees_url %>">
+      <thead>
+      <tr>
+        <th></th>
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:description) %></th>
+        <th class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @service_fees.each do |service_fee| %>
+          <tr id="<%= spree_dom_id service_fee %>" data-hook="admin_service_fees_index_rows">
+            <td class="move-handle text-center">
+              <span class="icon icon-move handle"></span>
+            </td>
+            <td><%= link_to service_fee.name, edit_admin_service_fee_path(service_fee) %></td>
+            <td><%= service_fee.description %></td>
+            <td class="actions actions-2">
+              <%= link_to_edit service_fee, :no_text => true %>
+              <%= link_to_delete service_fee, :no_text => true %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="alert alert-info no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::ServiceFee)) %>,
+      <%= link_to Spree.t(:add_one), new_object_url %>!
+    </div>
+<% end %>

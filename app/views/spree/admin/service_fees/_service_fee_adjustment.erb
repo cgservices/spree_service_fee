@@ -1,0 +1,22 @@
+
+<div class="panel panel-default" id="<%= dom_id service_fee_adjustment %>">
+  <div class="panel-heading">
+    <%= link_to_with_icon 'delete', '', spree.admin_service_fee_service_fee_adjustment_path(@service_fee, service_fee_adjustment), remote: true, method: :delete, class: 'delete pull-right' %>
+    <h3 class='panel-title'><%= Spree.t(:adjustment) %></h3>
+  </div>
+  <% param_prefix = "service_fee[service_fee_adjustments_attributes][#{service_fee_adjustment.id}]" %>
+  <%= hidden_field_tag "#{param_prefix}[id]", service_fee_adjustment.id %>
+
+  <div class="panel-body">
+    <div class="row no-marginb">
+      <div class="form-group col-md-12 no-marginb">
+        <label for="<%= "#{param_prefix}currency" %>"><%= Spree.t('currency') %>:</label>
+        <%= text_field_tag "#{param_prefix}[currency]", service_fee_adjustment.currency, class: 'form-control marginb' %>
+
+        <label for="<%= "#{param_prefix}amount" %>"><%= Spree.t('amount') %>:</label>
+        <%= text_field_tag "#{param_prefix}[amount]", service_fee_adjustment.amount, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,11 @@
+<div class="panel panel-default" id="<%= dom_id service_fee_rule %>">
+  <% type_name = service_fee_rule.class.name.demodulize.underscore %>
+  <div class="panel-heading">
+    <%= link_to_with_icon 'delete', '', spree.admin_service_fee_service_fee_rule_path(@service_fee, service_fee_rule), remote: true, method: :delete, class: 'delete pull-right' %>
+    <h3 class='panel-title'><%= Spree.t("service_fee_rule_types.#{type_name.to_s}.name") %></h3>
+  </div>
+  <% param_prefix = "service_fee[service_fee_rules_attributes][#{service_fee_rule.id}]" %>
+  <%= hidden_field_tag "#{param_prefix}[id]", service_fee_rule.id %>
+
+  <%= render partial: "spree/admin/service_fees/rules/#{type_name}", locals: {service_fee_rule: service_fee_rule, param_prefix: param_prefix} rescue nil %>
+</div>

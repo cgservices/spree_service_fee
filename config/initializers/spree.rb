@@ -1,0 +1,1 @@
+Rails.application.config.spree.adjusters << Spree::Adjustable::Adjuster::ServiceFee
