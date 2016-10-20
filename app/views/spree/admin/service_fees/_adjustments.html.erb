@@ -15,7 +15,7 @@
   <%= form_for @service_fee, :url => object_url, :method => :put do |f| %>
       <div class="actions">
         <div id="adjustments" class="filter_list margint">
-          <% if @service_fee.rules.any? %>
+          <% if @service_fee.adjustment_amounts.any? %>
               <%= render :partial => 'service_fee_adjustment', :collection => @service_fee.adjustment_amounts, :locals => {} %>
           <% else %>
               <div class="alert alert-warning no-objects-found">
