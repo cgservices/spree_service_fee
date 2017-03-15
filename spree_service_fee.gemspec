@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_service_fee'
-  s.version     = '1.0.2'
+  s.version     = '1.0.3'
   s.summary     = ''
   s.description = ''
   s.required_ruby_version = '>= 2.1.0'
@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'pry'
 end

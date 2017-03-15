@@ -17,13 +17,11 @@ module Spree
 
     # Find and apply the correct service fee for the order
     def self.adjust(order, items)
-
-      # Remove fees before continuing just to be sure
-      Spree::Adjustment.where(adjustable: items).service_fee.destroy_all
-
       return unless Rails.application.config.spree.service_fee.enabled?
 
       items.each do |item|
+        # Remove fees before continuing just to be sure
+        item.adjustments.where(source_type: 'Spree::ServiceFee').destroy_all
         service_fee = Spree::ServiceFee.find{|service_fee| service_fee.eligible?(item)}
         service_fee.adjust(order, item) if service_fee.present?
       end
