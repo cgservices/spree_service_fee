@@ -35,7 +35,16 @@ module Spree
     def compute_amount(adjustable)
       raise 'Given adjustable does not contain a currency' unless adjustable.respond_to?(:currency)
 
-      adjustment = adjustment_amounts.where(currency:adjustable.currency).first
+      # When the adjustment on a LineItem in the order is updated, we want to
+      # keep this value instead of resetting it back to the original value.
+      if adjustable.is_a?(Spree::LineItem) && adjustable.adjustments.service_fee.any?
+        adjustment = adjustable.adjustments.service_fee.first do |adjustment|
+          adjustment.source.present? &&
+            adjustment.source.service_fee_adjustments.where(currency: adjustable.currency).any?
+        end
+      end
+
+      adjustment ||= adjustment_amounts.where(currency: adjustable.currency).first
       adjustment.present? ? adjustment.amount : 0.0
     end
 
